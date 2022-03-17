@@ -1228,13 +1228,13 @@ def verifica():
         pass
     else:
 
-        tkWindow.config(cursor="circle")
-        tkWindow.update()
+
 
         for filename in os.listdir(path):
             if not filename.endswith('.xml'): continue
             fullname = os.path.join(path, filename)
-            tree = ET.parse(fullname)
+            parser = ET.XMLParser(encoding='iso-8859-5')
+            tree = ET.parse(fullname, parser=parser)
 
             doc = tree.getroot()
 
@@ -1256,8 +1256,7 @@ def verifica():
                     print(localizador)
 
         messagebox.showinfo('Processo', 'Processo concluido')
-        tkWindow.config(cursor="")
-        tkWindow.update()
+
 
 
 def processonfe():
@@ -1274,6 +1273,6 @@ def processonfe():
 button1 = Button(tkWindow, background="lightgray",
                  text='VERIFICA NFE',
                  command=processonfe)
-button1.grid(row=0, column=0, columnspan=5, padx=100, ipadx=60)
+button1.place(relx=0.5, rely=0.3, anchor=CENTER)
 
 tkWindow.mainloop()
